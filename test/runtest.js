@@ -7,12 +7,14 @@ const mocha = new Mocha({
 });
 mocha.color(true);
 
+process.env.DB_URL = "mongodb://localhost:27017/test";
+
 const testRoot = path.resolve(__dirname, "..");
 
 glob("{,!(node_modules)/**/}*.test.js", { cwd: testRoot }, (err, files) => {
   if (err) {
     console.log(`ERROR: ${err}`);
-    return e(err);
+    return error(err);
   }
 
   // Add files to the test suite
@@ -22,11 +24,11 @@ glob("{,!(node_modules)/**/}*.test.js", { cwd: testRoot }, (err, files) => {
     // Run the mocha test
     mocha.run((failures) => {
       if (failures > 0) {
-        e(new Error(`${failures} tests failed.`));
+        error(new Error(`${failures} tests failed.`));
       }
     });
   } catch (err) {
     console.error(err);
-    e(err);
+    error(err);
   }
 });

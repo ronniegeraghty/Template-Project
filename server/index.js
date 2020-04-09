@@ -1,17 +1,24 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const morgan = require("morgan");
 const dotenv = require("dotenv");
 dotenv.config();
 const port = process.env.PORT;
+const dbConnect = require("./dbConnect");
 
+// Set Up Express App
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
+app.use(morgan("tiny"));
+
+//Connect to DB
+dbConnect.connect();
 
 const sample = require("./routes/api/sample");
 app.use("/api/sample", sample);
 
-const server = app.listen(port, () =>
+const server = app.listen(port || 3000, () =>
   console.log(`Listening on port: ${port}.`)
 );
 
@@ -19,5 +26,6 @@ const server = app.listen(port, () =>
 module.exports = server;
 function stop() {
   server.close();
+  dbConnect.close();
 }
 module.exports.stop = stop;
