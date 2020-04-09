@@ -1,18 +1,18 @@
 //require test dependencies
 const chai = require("chai");
 const chaiHttp = require("chai-http");
-console.log("---------STARTING SERVER------------");
+console.log("STARTING SERVER");
 const server = require("../../index");
 const should = chai.should();
 
 chai.use(chaiHttp);
-describe("Test /api/sample", () => {
+describe("----------TEST /api/sample----------", () => {
   before(function () {
-    console.log("-----------CLEARING DB--------------");
+    console.log("CLEARING DB");
     chai.request(server).delete("/api/sample");
   });
   after(function () {
-    console.log("--------CLOSING SERVER AND DB--------");
+    console.log("CLOSING SERVER AND DB");
     require("../../index").stop();
   });
   describe("/POST", () => {

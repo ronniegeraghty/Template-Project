@@ -10,7 +10,9 @@ const dbConnect = require("./dbConnect");
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
-app.use(morgan("tiny"));
+if (process.env.NODE_ENV == "development") {
+  app.use(morgan("tiny"));
+}
 
 //Connect to DB
 dbConnect.connect();
