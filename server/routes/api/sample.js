@@ -25,7 +25,8 @@ router
       if (!err) {
         res.send(`Successfully posted ${sample}`);
       } else {
-        res.send(err);
+        res.json(err);
+        // res.send(err);
       }
     });
   })
