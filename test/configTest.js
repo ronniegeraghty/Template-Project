@@ -1,5 +1,4 @@
-const dotenv = require("dotenv");
-dotenv.config();
+require("dotenv").config();
 const Sample = require("../server/models/Sample");
 
 module.exports.config = () => {
