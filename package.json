@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server/index.js",
     "dev": "nodemon server/index.js",
-    "test": "mocha --recursive"
+    "test": "mocha"
   },
   "author": "Ronnie Geraghty",
   "license": "ISC",
