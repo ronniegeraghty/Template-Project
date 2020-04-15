@@ -110,6 +110,7 @@ describe("server/routes/api/sample", () => {
         done();
       });
     });
+
     describe("/:sampleID/GET", () => {
       it("It should GET a sample by ID", (done) => {
         chai
@@ -124,6 +125,7 @@ describe("server/routes/api/sample", () => {
           });
       });
     });
+
     describe("/:sampleID/PUT", () => {
       it("It should PUT new values for all attributes", (done) => {
         chai
@@ -148,6 +150,7 @@ describe("server/routes/api/sample", () => {
         });
       });
     });
+
     describe("/:sampleID/PATCH", () => {
       it("It should PATCH new value for given attributes", (done) => {
         chai
@@ -171,6 +174,7 @@ describe("server/routes/api/sample", () => {
         });
       });
     });
+
     describe("/:sampleID/DELETE", () => {
       it("It should DELETE sample by ID", (done) => {
         chai
