@@ -3,7 +3,7 @@ const chai = require("chai");
 const chaiHttp = require("chai-http");
 const should = chai.should();
 chai.use(chaiHttp);
-const configTest = require("../../../configTest");
+const configTest = require("../../../configTest"); // Functions to configure the test environment
 const Sample = require("../../../../server/models/Sample");
 
 //Make server a global here, but instanciate in before method
