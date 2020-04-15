@@ -55,10 +55,10 @@ router
     });
   })
   .put(function (req, res) {
-    Sample.updateOne(
+    Sample.update(
       { _id: req.params.sampleID },
       { name: req.body.name, message: req.body.message },
-      {},
+      { overwrite: true },
       function (err, sample) {
         if (!err) {
           res.send(`Successfully updated Sample: ${JSON.stringify(sample)}`);
