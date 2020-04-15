@@ -17,8 +17,7 @@
     "port": 9229,
     "protocol": "inspector",
     "timeout": 5000,
-    "stopOnEntry": false,
-    "recursive": true
+    "stopOnEntry": false
   },
   "dependencies": {
     "body-parser": "^1.19.0",
