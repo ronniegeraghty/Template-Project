@@ -1,3 +1,5 @@
+/*A quick module that will connect and disconnect the server from the 
+mongodb database using the mongoose npm package.*/
 require("dotenv").config();
 const mongoose = require("mongoose");
 
