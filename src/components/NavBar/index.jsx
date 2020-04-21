@@ -12,13 +12,15 @@ const NavBar = () => {
       </div>
       <nav className="navbar navbar-expand-sm navbar-light border-bottom justify-content-between">
         <Link className="navbar-brand" to="/">
-          Template Project
+          Template_Project
         </Link>
         <div className="navbar-nav">
           <Link className="nav-item nav-link active" to="/">
-            Home
+            Master_Detail
           </Link>
-
+          <Link className="nav-item nav-link active" to="List">
+            List
+          </Link>
           <Link className="nav-item nav-link active" to="Blank">
             Blank
           </Link>
@@ -26,5 +28,5 @@ const NavBar = () => {
       </nav>
     </React.Fragment>
   );
-};
+}
 export default NavBar;
