@@ -23,12 +23,16 @@
   },
   "dependencies": {
     "body-parser": "^1.19.0",
+    "bootstrap": "^4.4.1",
+    "classnames": "^2.2.6",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "mongoose": "^5.9.7",
     "morgan": "^1.10.0",
     "react": "^16.13.1",
+    "react-bootstrap": "^1.0.0",
     "react-dom": "^16.13.1",
+    "react-router-dom": "^5.1.2",
     "react-scripts": "^3.4.1"
   },
   "devDependencies": {
@@ -38,7 +42,11 @@
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
     "concurrently": "^5.1.0",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
     "glob": "^7.1.6",
+    "ignore-styles": "^5.0.1",
+    "jsdom": "^16.2.2",
     "mocha": "^7.1.1",
     "nodemon": "^2.0.2"
   },
