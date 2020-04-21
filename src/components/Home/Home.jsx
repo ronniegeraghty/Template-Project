@@ -3,6 +3,7 @@ import classnames from "classnames";
 import styles from "./masterdetail.module.css";
 import { Jumbotron, Button, Container, Modal } from "react-bootstrap";
 import AddSampleModal from "./AddSampleModal";
+import SamplesList from "./SamplesList";
 
 const Home = () => {
   const [show, setShow] = useState(false);
@@ -20,6 +21,7 @@ const Home = () => {
           <AddSampleModal />
         </Container>
       </Jumbotron>
+      <SamplesList />
     </main>
   );
 };
