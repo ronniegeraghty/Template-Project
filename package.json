@@ -20,11 +20,14 @@
     "extends": "react-app"
   },
   "devDependencies": {
-    "concurrently": "5.0.2"
+    "concurrently": "5.0.2",
+    "nodemon": "^2.0.3"
   },
   "scripts": {
     "start": "concurrently \"yarn start-frontend || npm run start-frontend\" \"yarn start-backend || npm run start-backend\"",
+    "dev": "concurrently \"yarn start-frontend || npm run start-frontend\" \"yarn dev-backend || npm run dev-backend\"",
     "start-backend": "node server/server.js",
+    "dev-backend": "nodemon server/server.js",
     "start-frontend": "react-scripts start",
     "build": "node ./buildScript",
     "test": "react-scripts test",
