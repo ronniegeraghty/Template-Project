@@ -3,46 +3,59 @@ import ListItem from "./ListItem";
 import ListForm from "./ListForm";
 import WarningMessage from "../WarningMessage";
 import CONSTANTS from "../../constants";
+import SampleCard from "./SampleCard";
 
 const List = () => {
   const [listItems, setListItems] = useState([]);
-  const [warningMessage, setWarningMessage] = useState({warningMessageOpen: false, warningMessageText: ""});
+  const [samples, setSamples] = useState([]);
+  const [warningMessage, setWarningMessage] = useState({
+    warningMessageOpen: false,
+    warningMessageText: "",
+  });
   const getListItem = () => {
-    let promiseList = fetch(CONSTANTS.ENDPOINT.LIST)
-      .then(response => {
-        if (!response.ok) {
-          throw Error(response.statusText);
-        }
-        return response.json();
-      })
+    let promiseList = fetch(CONSTANTS.ENDPOINT.LIST).then((response) => {
+      if (!response.ok) {
+        throw Error(response.statusText);
+      }
+      return response.json();
+    });
     return promiseList;
-  }
+  };
+  const getSamples = () => {
+    let promiseSample = fetch("/api/sample").then((response) => {
+      if (!response.ok) {
+        throw Error(response.statusText);
+      }
+      return response.json();
+    });
+    return promiseSample;
+  };
 
   const deleteListItem = (listItem) => {
     fetch(`${CONSTANTS.ENDPOINT.LIST}/${listItem._id}`, { method: "DELETE" })
-      .then(response => {
+      .then((response) => {
         if (!response.ok) {
           throw Error(response.statusText);
         }
         return response.json();
       })
-      .then(result => {
-        setListItems(listItems.filter(item => item._id !== result._id));
+      .then((result) => {
+        setListItems(listItems.filter((item) => item._id !== result._id));
       })
-      .catch(error => {
+      .catch((error) => {
         setWarningMessage({
           warningMessageOpen: true,
-          warningMessageText: `${CONSTANTS.ERROR_MESSAGE.LIST_DELETE} ${error}`
+          warningMessageText: `${CONSTANTS.ERROR_MESSAGE.LIST_DELETE} ${error}`,
         });
       });
-  }
+  };
 
   const addListItem = (textField) => {
     // Warning Pop Up if the user submits an empty message
     if (!textField) {
       setWarningMessage({
         warningMessageOpen: true,
-        warningMessageText: CONSTANTS.ERROR_MESSAGE.LIST_EMPTY_MESSAGE
+        warningMessageText: CONSTANTS.ERROR_MESSAGE.LIST_EMPTY_MESSAGE,
       });
       return;
     }
@@ -51,22 +64,22 @@ const List = () => {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        text: textField
-      })
+        text: textField,
+      }),
     })
-      .then(response => {
+      .then((response) => {
         if (!response.ok) {
           throw Error(response.statusText);
         }
         return response.json();
       })
-      .then(itemAdded =>{
+      .then((itemAdded) => {
         setListItems([itemAdded, ...listItems]);
       })
-      .catch(error =>
+      .catch((error) =>
         setWarningMessage({
           warningMessageOpen: true,
-          warningMessageText: `${CONSTANTS.ERROR_MESSAGE.LIST_ADD} ${error}`
+          warningMessageText: `${CONSTANTS.ERROR_MESSAGE.LIST_ADD} ${error}`,
         })
       );
   };
@@ -74,19 +87,31 @@ const List = () => {
   const handleWarningClose = () => {
     setWarningMessage({
       warningMessageOpen: false,
-      warningMessageText: ""
+      warningMessageText: "",
     });
   };
 
   React.useEffect(() => {
     getListItem()
-      .then(list => {setListItems(list)})
-      .catch(error =>
+      .then((list) => {
+        setListItems(list);
+      })
+      .catch((error) =>
         setWarningMessage({
           warningMessageOpen: true,
-          warningMessageText: `${CONSTANTS.ERROR_MESSAGE.LIST_GET} ${error}`
+          warningMessageText: `${CONSTANTS.ERROR_MESSAGE.LIST_GET} ${error}`,
         })
       );
+    getSamples()
+      .then((samples) => {
+        setSamples(samples);
+      })
+      .catch((error) => {
+        setWarningMessage({
+          warningMessageOpen: true,
+          warningMessageText: `Error getting samples: ${error}`,
+        });
+      });
   }, []);
 
   return (
@@ -96,9 +121,9 @@ const List = () => {
           <h3>Bootstrap List Template</h3>
         </div>
         <div className="col-12 p-0">
-          <ListForm addListItem={addListItem}/>
+          <ListForm addListItem={addListItem} />
         </div>
-        {listItems.map(listItem => (
+        {listItems.map((listItem) => (
           <ListItem
             key={listItem._id}
             listItem={listItem}
@@ -111,8 +136,23 @@ const List = () => {
           onWarningClose={handleWarningClose}
         />
       </div>
+      <div className="row">
+        <div className="col mt-5 p-0">
+          <h3>Sample List</h3>
+        </div>
+        <div className="col-12 p-0">
+          <ListForm addListItem={addListItem} />
+        </div>
+        {samples.map((sample) => (
+          <SampleCard
+            key={sample._id}
+            sample={sample}
+            deleteListItem={deleteListItem}
+          />
+        ))}
+      </div>
     </main>
   );
-}
+};
 
 export default List;

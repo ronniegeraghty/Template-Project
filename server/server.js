@@ -1,13 +1,12 @@
 ﻿#!/usr/bin/env node
-
 /**
  * Module dependencies.
  */
-
 const debug = require("debug")("WebTemplateStudioExpress:server");
 const http = require("http");
 const app = require("./app");
 const CONSTANTS = require("./constants");
+const dbConnect = require("./dbConnect");
 
 /**
  * Get port from environment and store in Express.
@@ -22,10 +21,12 @@ app.set("port", port);
 
 const server = http.createServer(app);
 
+// Connect to DB
+dbConnect.connect();
+
 /**
  * Listen on provided port, on all network interfaces.
  */
-
 server.listen(port);
 server.on("error", onError);
 server.on("listening", onListening);
