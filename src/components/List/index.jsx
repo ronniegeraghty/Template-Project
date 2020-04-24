@@ -64,7 +64,7 @@ const List = () => {
         return response.json();
       })
       .then((sampleAdded) => {
-        setSamples([sampleAdded, ...samples]);
+        setSamples([...samples, sampleAdded]);
       })
       .catch((error) =>
         setWarningMessage({
