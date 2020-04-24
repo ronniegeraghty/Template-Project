@@ -18,15 +18,15 @@ const NavBar = () => {
           <Link className="nav-item nav-link active" to="/">
             Master_Detail
           </Link>
-          <Link className="nav-item nav-link active" to="List">
+          <Link className="nav-item nav-link active" to="sample-list">
             List
           </Link>
-          <Link className="nav-item nav-link active" to="Blank">
+          <Link className="nav-item nav-link active" to="blank">
             Blank
           </Link>
         </div>
       </nav>
     </React.Fragment>
   );
-}
+};
 export default NavBar;

@@ -1,6 +1,5 @@
 ﻿import React, { useState } from "react";
-import WarningMessage from "../WarningMessage";
-import CONSTANTS from "../../constants";
+import WarningMessage from "../WarningMessage/WarningMessage";
 import SampleCard from "./SampleCard";
 import SampleForm from "./SampleForm";
 
