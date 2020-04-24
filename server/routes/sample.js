@@ -85,7 +85,10 @@ router
       if (err) {
         res.json(err);
       } else {
-        res.json("Successfully deleted the sample.");
+        res.json({
+          _id: req.params.sampleID,
+          text: "The sample was deleted",
+        });
       }
     });
   });

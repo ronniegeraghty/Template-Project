@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const SampleCard = ({ sample, deleteListItem }) => {
+const SampleCard = ({ sample, deleteSample }) => {
   React.useEffect(() => {
     console.log(`SAMPLE: ${sample.name}`);
   }, []);
@@ -19,7 +19,7 @@ const SampleCard = ({ sample, deleteListItem }) => {
             className="close py-2"
             data-dismiss="alert"
             aria-label="Close"
-            onClick={() => deleteListItem(sample)}
+            onClick={() => deleteSample(sample)}
           >
             <div aria-hidden="true">&times;</div>
           </button>
@@ -31,7 +31,7 @@ const SampleCard = ({ sample, deleteListItem }) => {
 
 SampleCard.propTypes = {
   sample: PropTypes.any,
-  deleteListItem: PropTypes.func,
+  deleteSample: PropTypes.func,
 };
 
 export default SampleCard;

@@ -1,26 +1,15 @@
 ﻿import React, { useState } from "react";
-import ListItem from "./ListItem";
-import ListForm from "./ListForm";
 import WarningMessage from "../WarningMessage";
 import CONSTANTS from "../../constants";
 import SampleCard from "./SampleCard";
+import SampleForm from "./SampleForm";
 
 const List = () => {
-  const [listItems, setListItems] = useState([]);
   const [samples, setSamples] = useState([]);
   const [warningMessage, setWarningMessage] = useState({
     warningMessageOpen: false,
     warningMessageText: "",
   });
-  const getListItem = () => {
-    let promiseList = fetch(CONSTANTS.ENDPOINT.LIST).then((response) => {
-      if (!response.ok) {
-        throw Error(response.statusText);
-      }
-      return response.json();
-    });
-    return promiseList;
-  };
   const getSamples = () => {
     let promiseSample = fetch("/api/sample").then((response) => {
       if (!response.ok) {
@@ -31,8 +20,8 @@ const List = () => {
     return promiseSample;
   };
 
-  const deleteListItem = (listItem) => {
-    fetch(`${CONSTANTS.ENDPOINT.LIST}/${listItem._id}`, { method: "DELETE" })
+  const deleteSample = (sample) => {
+    fetch(`/api/sample/${sample._id}`, { method: "DELETE" })
       .then((response) => {
         if (!response.ok) {
           throw Error(response.statusText);
@@ -40,31 +29,32 @@ const List = () => {
         return response.json();
       })
       .then((result) => {
-        setListItems(listItems.filter((item) => item._id !== result._id));
+        setSamples(samples.filter((sample) => sample._id !== result._id));
       })
       .catch((error) => {
         setWarningMessage({
           warningMessageOpen: true,
-          warningMessageText: `${CONSTANTS.ERROR_MESSAGE.LIST_DELETE} ${error}`,
+          warningMessageText: `ERROR Deleting Sample: ${error}`,
         });
       });
   };
 
-  const addListItem = (textField) => {
+  const addSample = (name, message) => {
     // Warning Pop Up if the user submits an empty message
-    if (!textField) {
+    if (!name || !message) {
       setWarningMessage({
         warningMessageOpen: true,
-        warningMessageText: CONSTANTS.ERROR_MESSAGE.LIST_EMPTY_MESSAGE,
+        warningMessageText: "All fields must be filled out!",
       });
       return;
     }
 
-    fetch(CONSTANTS.ENDPOINT.LIST, {
+    fetch("/api/sample", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        text: textField,
+        name: name,
+        message: message,
       }),
     })
       .then((response) => {
@@ -73,13 +63,13 @@ const List = () => {
         }
         return response.json();
       })
-      .then((itemAdded) => {
-        setListItems([itemAdded, ...listItems]);
+      .then((sampleAdded) => {
+        setSamples([sampleAdded, ...samples]);
       })
       .catch((error) =>
         setWarningMessage({
           warningMessageOpen: true,
-          warningMessageText: `${CONSTANTS.ERROR_MESSAGE.LIST_ADD} ${error}`,
+          warningMessageText: `ERROR Adding Sample: ${error}`,
         })
       );
   };
@@ -92,16 +82,6 @@ const List = () => {
   };
 
   React.useEffect(() => {
-    getListItem()
-      .then((list) => {
-        setListItems(list);
-      })
-      .catch((error) =>
-        setWarningMessage({
-          warningMessageOpen: true,
-          warningMessageText: `${CONSTANTS.ERROR_MESSAGE.LIST_GET} ${error}`,
-        })
-      );
     getSamples()
       .then((samples) => {
         setSamples(samples);
@@ -118,16 +98,16 @@ const List = () => {
     <main id="mainContent" className="container">
       <div className="row">
         <div className="col mt-5 p-0">
-          <h3>Bootstrap List Template</h3>
+          <h3>Samples List</h3>
         </div>
         <div className="col-12 p-0">
-          <ListForm addListItem={addListItem} />
+          <SampleForm addSample={addSample} />
         </div>
-        {listItems.map((listItem) => (
-          <ListItem
-            key={listItem._id}
-            listItem={listItem}
-            deleteListItem={deleteListItem}
+        {samples.map((sample) => (
+          <SampleCard
+            key={sample._id}
+            sample={sample}
+            deleteSample={deleteSample}
           />
         ))}
         <WarningMessage
@@ -135,21 +115,6 @@ const List = () => {
           text={warningMessage.warningMessageText}
           onWarningClose={handleWarningClose}
         />
-      </div>
-      <div className="row">
-        <div className="col mt-5 p-0">
-          <h3>Sample List</h3>
-        </div>
-        <div className="col-12 p-0">
-          <ListForm addListItem={addListItem} />
-        </div>
-        {samples.map((sample) => (
-          <SampleCard
-            key={sample._id}
-            sample={sample}
-            deleteListItem={deleteListItem}
-          />
-        ))}
       </div>
     </main>
   );
