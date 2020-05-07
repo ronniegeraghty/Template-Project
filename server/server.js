@@ -1,5 +1,4 @@
-﻿#!/usr/bin/env node
-/**
+﻿/**
  * Module dependencies.
  */
 const debug = require("debug")("WebTemplateStudioExpress:server");

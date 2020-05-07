@@ -102,6 +102,8 @@ const List = () => {
         <div className="col-12 p-0">
           <SampleForm addSample={addSample} />
         </div>
+      </div>
+      <div className="row">
         {samples.map((sample) => (
           <SampleCard
             key={sample._id}
