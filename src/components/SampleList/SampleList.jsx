@@ -109,6 +109,7 @@ const List = () => {
             key={sample._id}
             sample={sample}
             deleteSample={deleteSample}
+            setWarningMessage={setWarningMessage}
           />
         ))}
         <WarningMessage

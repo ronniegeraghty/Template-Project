@@ -1,12 +1,17 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
-const SampleCard = ({ sample, deleteSample }) => {
+const SampleCard = ({ sample, deleteSample, setWarningMessage }) => {
   const [editMode, setEditMode] = useState(false);
   const [name, setName] = useState(sample.name);
+  const [oldName, setOldName] = useState(sample.name);
   const [message, setMessage] = useState(sample.message);
+  const [oldMessage, setOldMessage] = useState(sample.message);
 
   const editSample = () => {
+    if (editMode) {
+      updateSample();
+    }
     setEditMode(!editMode);
   };
 
@@ -15,6 +20,47 @@ const SampleCard = ({ sample, deleteSample }) => {
   };
   const handleChangeMessage = (e) => {
     setMessage(e.target.value);
+  };
+
+  const updateSample = () => {
+    if (!name || !message) {
+      setWarningMessage({
+        warningMessageOpen: true,
+        warningMessageText: "All fields must be filled out!",
+      });
+      setName(oldName);
+      setMessage(oldMessage);
+      return;
+    }
+
+    fetch(`/api/sample/${sample._id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: name,
+        message: message,
+      }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw Error(response.statusText);
+        }
+        return response.json();
+      })
+      .then((sampleUpdated) => {
+        setWarningMessage({
+          warningMessageOpen: true,
+          warningMessageText: `${sampleUpdated}`,
+        });
+        setOldName(name);
+        setOldMessage(message);
+      })
+      .catch((error) => {
+        setWarningMessage({
+          warningMessageOpen: true,
+          warningMessageText: `ERROR Updating Sample: ${error}`,
+        });
+      });
   };
 
   return (
@@ -61,7 +107,7 @@ const SampleCard = ({ sample, deleteSample }) => {
             <input
               type="text"
               className="form-control col-12 my-auto"
-              placeholder="Sample Name"
+              placeholder="Sample Message"
               aria-label="Sample Name"
               value={message}
               onChange={handleChangeMessage}
@@ -77,6 +123,7 @@ const SampleCard = ({ sample, deleteSample }) => {
 SampleCard.propTypes = {
   sample: PropTypes.any,
   deleteSample: PropTypes.func,
+  setWarningMessage: PropTypes.func,
 };
 
 export default SampleCard;
