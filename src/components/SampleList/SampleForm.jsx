@@ -22,7 +22,7 @@ const SampleForm = (params) => {
     <div>
       <form onSubmit={handleSubmit} className="form-inline mb-3">
         <div className="form-row">
-          <div className="col-sm">
+          <div className="col-10 mb-1">
             <input
               type="text"
               onChange={handleChangeName}
@@ -33,7 +33,7 @@ const SampleForm = (params) => {
               aria-label="Enter Name..."
             />
           </div>
-          <div className="col-md">
+          <div className="col-10 mb-1">
             <input
               type="text"
               onChange={handleChangeMessage}
@@ -44,8 +44,8 @@ const SampleForm = (params) => {
               aria-label="Enter a Message..."
             />
           </div>
-          <div className="col">
-            <button type="submit" className="btn btn-primary ml-2">
+          <div className="col-12 mb-1">
+            <button type="submit" className="btn btn-primary">
               Submit
             </button>
           </div>

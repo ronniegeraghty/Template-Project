@@ -64,26 +64,13 @@ const SampleCard = ({ sample, deleteSample, setWarningMessage }) => {
   };
 
   return (
-    <div className="col-lg-3 col-md-4 col-sm-12 pl-0">
-      <div className="card mb-3">
-        <div className="card-body">
+    <div className="col-5 p-0 mb-3 ml-1 mr-3 d-flex align-items-lg-stretch">
+      <div className="card">
+        <div className="card-body py-1">
           <div className="row">
-            <h5 className="card-title col-7 my-auto mr-1" hidden={editMode}>
-              {name}
-            </h5>
-            <input
-              type="text"
-              className="form-control col-7 my-auto mr-1"
-              placeholder="Sample Name"
-              aria-label="Sample Name"
-              value={name}
-              onChange={handleChangeName}
-              hidden={!editMode}
-            />
-
             <button
               type="button"
-              className="btn btn-secondary col-2 mx-1"
+              className="btn btn-secondary col mr-1 mb-1 "
               onClick={editSample}
             >
               {/* FontAwesome Edit Icon */}
@@ -91,7 +78,7 @@ const SampleCard = ({ sample, deleteSample, setWarningMessage }) => {
             </button>
             <button
               type="button"
-              className="btn btn-danger col-2 ml-1"
+              className="btn btn-danger col ml-1 mb-1"
               data-dismiss="alert"
               aria-label="Close"
               onClick={() => deleteSample(sample)}
@@ -99,14 +86,26 @@ const SampleCard = ({ sample, deleteSample, setWarningMessage }) => {
               {/* FontAwesome Trash Icon */}
               <i className="fas fa-trash-alt"></i>
             </button>
+            <h5 className="card-title col-12 mb-1 p-0" hidden={editMode}>
+              {name}
+            </h5>
+            <input
+              type="text"
+              className="form-control col-12 mb-1 p-0"
+              placeholder="Sample Name"
+              aria-label="Sample Name"
+              value={name}
+              onChange={handleChangeName}
+              hidden={!editMode}
+            />
           </div>
-          <div className="row my-2">
-            <p className="card-text col-12 my-auto" hidden={editMode}>
+          <div className="row">
+            <p className="card-text col mb-1 p-0" hidden={editMode}>
               {message}
             </p>
             <input
               type="text"
-              className="form-control col-12 my-auto"
+              className="form-control col p-0"
               placeholder="Sample Message"
               aria-label="Sample Name"
               value={message}

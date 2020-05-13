@@ -94,14 +94,12 @@ const List = () => {
   }, []);
 
   return (
-    <main id="mainContent" className="container">
+    <main id="mainContent" className="container mx-3 mt-2">
+      <div className="row mb-1">
+        <h3>Samples List</h3>
+      </div>
       <div className="row">
-        <div className="col mt-5 p-0">
-          <h3>Samples List</h3>
-        </div>
-        <div className="col-12 p-0">
-          <SampleForm addSample={addSample} />
-        </div>
+        <SampleForm addSample={addSample} />
       </div>
       <div className="row">
         {samples.map((sample) => (
@@ -112,12 +110,13 @@ const List = () => {
             setWarningMessage={setWarningMessage}
           />
         ))}
-        <WarningMessage
-          open={warningMessage.warningMessageOpen}
-          text={warningMessage.warningMessageText}
-          onWarningClose={handleWarningClose}
-        />
       </div>
+
+      <WarningMessage
+        open={warningMessage.warningMessageOpen}
+        text={warningMessage.warningMessageText}
+        onWarningClose={handleWarningClose}
+      />
     </main>
   );
 };
