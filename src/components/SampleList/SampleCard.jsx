@@ -64,7 +64,7 @@ const SampleCard = ({ sample, deleteSample, setWarningMessage }) => {
   };
 
   return (
-    <div className="col-5 p-0 mb-3 ml-1 mr-3 d-flex align-items-lg-stretch">
+    <div className="col-5 col-sm-4 p-0 mb-3 ml-0 mr-4 d-flex align-items-lg-stretch">
       <div className="card">
         <div className="card-body py-1">
           <div className="row">

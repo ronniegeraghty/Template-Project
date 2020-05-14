@@ -44,7 +44,7 @@ const SampleForm = (params) => {
               aria-label="Enter a Message..."
             />
           </div>
-          <div className="col-12 mb-1">
+          <div className="col-6 mb-1">
             <button type="submit" className="btn btn-primary">
               Submit
             </button>

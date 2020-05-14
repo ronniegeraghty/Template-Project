@@ -5,8 +5,8 @@ const Footer = () => {
   return (
     <footer className={styles.footer}>
       <div className="container-fluid">
-        <div className="row justify-content-around">
-          <div className="col-8 col-md-5">
+        <div className="row">
+          <div className="col-12 col-md-5">
             <h5 className={styles.title}>Template_Project</h5>
             <p className={styles.description}>
               This is placeholder text. Your web app description goes here.
@@ -16,17 +16,15 @@ const Footer = () => {
             <ul className="list-unstyled">
               <li>
                 <a className={styles.footerlink} href="/">
-                  Example Link
+                  Home
                 </a>
               </li>
               <li>
-                <a className={styles.footerlink} href="/">
-                  Example Link
-                </a>
-              </li>
-              <li>
-                <a className={styles.footerlink} href="/">
-                  Example Link
+                <a
+                  className={styles.footerlink}
+                  href="https://github.com/ronniegeraghty/Template-Project"
+                >
+                  GitHub
                 </a>
               </li>
             </ul>
@@ -35,5 +33,5 @@ const Footer = () => {
       </div>
     </footer>
   );
-}
+};
 export default Footer;

@@ -94,7 +94,7 @@ const List = () => {
   }, []);
 
   return (
-    <main id="mainContent" className="container mx-3 mt-2">
+    <main id="mainContent" className="container col-11 ml-3 mt-2">
       <div className="row mb-1">
         <h3>Samples List</h3>
       </div>
